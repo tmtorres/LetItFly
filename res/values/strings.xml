@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">LetItFly</string>
+    <string name="app_name">Let It Fly</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="start">Throw Something!</string>
     <string name="aim">AIM!</string>
     <string name="throw_object">Press and Hold to THROW!</string>
     <string name="goToMap">Click for Map</string>
+    <string name="throw_again">Throw Again!</string>
 
 </resources>

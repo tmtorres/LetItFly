@@ -4,15 +4,17 @@
     android:orientation="vertical" 
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" 
-    android:background="@drawable/letitflylogo">
+    android:background="@drawable/bg_main">
     
-    <Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_centerHorizontal="true"
-    android:layout_centerVertical="true"
-    android:gravity="bottom|center"
-    android:text="@string/start"
-    android:onClick="goToObjSelection" />
+    <ImageButton
+        android:id="@+id/imageButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/button_main"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="300dip"
+   		android:gravity="bottom"
+   		android:onClick="goToObjSelection" />
+
     
 </RelativeLayout>

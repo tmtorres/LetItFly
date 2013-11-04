@@ -13,7 +13,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import cs371.letitfly.R;
 
 public class AimActivity extends Activity implements LocationListener{
 	

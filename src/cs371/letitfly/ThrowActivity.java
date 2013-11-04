@@ -11,10 +11,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
-import cs371.letitfly.R;
+import android.widget.ImageButton;
 
-public class ThrowActivity extends Activity {
+public class ThrowActivity extends Activity{
 	
 	SensorManager sensorManager;
 	private double[] maxVals;
@@ -26,12 +25,12 @@ public class ThrowActivity extends Activity {
 	    setContentView(R.layout.activity_throw);
 	    createSensor();
 	    
-	     final Bundle b = getIntent().getExtras();
+	    final Bundle b = getIntent().getExtras();
 	    
 	    
 	    maxVals = new double[3];
 	    
-	    Button button = (Button) findViewById(R.id.throw_button);
+	    ImageButton button = (ImageButton) findViewById(R.id.throw_button);
 	    button.setOnTouchListener(new View.OnTouchListener() {
 			public boolean onTouch(View v, MotionEvent event) {
 				if(event.getAction() == android.view.MotionEvent.ACTION_DOWN ) {
@@ -46,6 +45,7 @@ public class ThrowActivity extends Activity {
 			}); 
 	    
 	}
+	
 	
 	public void goToResults(Bundle b){
 		b.putDouble("xAcceleration", maxVals[0]);

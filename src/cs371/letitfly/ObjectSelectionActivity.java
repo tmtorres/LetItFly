@@ -3,8 +3,6 @@ package cs371.letitfly;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import cs371.letitfly.R;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

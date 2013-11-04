@@ -1,7 +1,11 @@
 package cs371.letitfly;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -10,8 +14,6 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import cs371.letitfly.R;
 
 public class MapsActivity extends Activity {
 	 
@@ -33,6 +35,25 @@ public class MapsActivity extends Activity {
         }
  
     }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+
+         MenuInflater inflater = getMenuInflater();
+         inflater.inflate(R.menu.main, menu);
+          return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+      switch (item.getItemId()) {
+      case R.id.menuItem1:
+    	Intent intent = new Intent(this, ObjectSelectionActivity.class);
+  		startActivity(intent);
+        break;
+      }
+      return true;
+    } 
  
     /**
      * function to load map. If map is not created it will create it for you

@@ -1,6 +1,5 @@
 package cs371.letitfly;
 
-import cs371.letitfly.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,7 +22,7 @@ public class MainActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		//getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 

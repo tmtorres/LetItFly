@@ -1,6 +1,5 @@
 package cs371.letitfly;
 
-import cs371.letitfly.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
