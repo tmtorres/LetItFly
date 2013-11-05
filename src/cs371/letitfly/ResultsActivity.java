@@ -1,5 +1,7 @@
 package cs371.letitfly;
 
+import java.util.Random;
+
 import cs371.letitfly.physics.MobileDevice;
 import cs371.letitfly.physics.Physics;
 import android.app.Activity;
@@ -28,6 +30,20 @@ public class ResultsActivity extends Activity {
 	    double xAcceleration = b.getDouble("xAcceleration");
 	    double yAcceleration = b.getDouble("yAcceleration");
 	    double zAcceleration = b.getDouble("zAcceleration");
+	    
+	    double averageAcceleration = Math.max((xAcceleration + yAcceleration + zAcceleration) / 3, 1);
+	    
+	    Random generator = new Random(0);
+	    
+	    if (xAcceleration < 1) {
+	    	xAcceleration *= (averageAcceleration * generator.nextDouble());
+	    }
+	    if (yAcceleration < 1) {
+	    	yAcceleration *= (averageAcceleration * generator.nextDouble());
+	    }
+	    if (zAcceleration < 1) {
+	    	zAcceleration *= (averageAcceleration * generator.nextDouble());
+	    }
 	    
 	    /*xAcceleration *= mass;
 	    yAcceleration *= mass;

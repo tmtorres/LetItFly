@@ -26,7 +26,7 @@ public class Physics {
 			return force / mass;
 		}
 		else if ((1 < weight) && (weight <= 3)) {
-			return (force / mass) * (10 - weight * (generator.nextDouble() * 2));
+			return (force / mass) * (10 - weight * (generator.nextDouble() * 0.5 + 2.1));
 		}
 		else if ((3 < weight) && (weight <= 10)) {
 			return 0;
