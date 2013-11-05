@@ -22,13 +22,20 @@ public class ResultsActivity extends Activity {
 	    txtView.setText("Object Name: "+b.getString("objectName"));
 	    
 	    double weight = b.getDouble("objectMass");
-	    double mass = weight / Physics.g;
 	    
 	    MobileDevice mobileDevice = MobileDevice.GALAXY_S4;
 	    
-	    double xVelocity = Physics.normalizeAcceleration(b.getDouble("xAcceleration"), mass, mobileDevice);
-	    double yVelocity = Physics.normalizeAcceleration(b.getDouble("yAcceleration"), mass, mobileDevice);
-	    double zVelocity = Physics.normalizeAcceleration(b.getDouble("zAcceleration"), mass, mobileDevice);
+	    double xAcceleration = b.getDouble("xAcceleration");
+	    double yAcceleration = b.getDouble("yAcceleration");
+	    double zAcceleration = b.getDouble("zAcceleration");
+	    
+	    /*xAcceleration *= mass;
+	    yAcceleration *= mass;
+	    zAcceleration *= mass;*/
+	    
+	    double xVelocity = Physics.normalizeAcceleration(xAcceleration, weight, mobileDevice);
+	    double yVelocity = Physics.normalizeAcceleration(yAcceleration, weight, mobileDevice);
+	    double zVelocity = Physics.normalizeAcceleration(zAcceleration, weight, mobileDevice);
 	    
 	    double time = Physics.getTimeElapsed(yVelocity);
 	    double xDisplacement = Physics.getDisplacement(xVelocity, time);
@@ -38,13 +45,13 @@ public class ResultsActivity extends Activity {
 		double feet = displacement * 3.28;
 	    
 	    TextView txtView1 = (TextView) this.findViewById(R.id.object_mass);
-	    txtView1.setText("Object's Mass: "+Double.toString(mass));
+	    txtView1.setText("Object's weight (pounds): "+Double.toString(weight * 2.20462));
 	    TextView txtView2 = (TextView) this.findViewById(R.id.x_acceleration);
-	    txtView2.setText("X Accleration: "+Double.toString(xVelocity));
+	    txtView2.setText("X Accleration: "+Double.toString(b.getDouble("xAcceleration")) +  " " + String.valueOf(xVelocity));
 	    TextView txtView3 = (TextView) this.findViewById(R.id.y_acceleration);
-	    txtView3.setText("Y Accleration: "+Double.toString(yVelocity));
+	    txtView3.setText("Y Accleration: "+Double.toString(b.getDouble("yAcceleration")) +  " " + String.valueOf(yVelocity));
 	    TextView txtView4 = (TextView) this.findViewById(R.id.z_acceleration);
-	    txtView4.setText("Z Accleration: "+Double.toString(zVelocity));
+	    txtView4.setText("Z Accleration: "+Double.toString(b.getDouble("zAcceleration")) +  " " + String.valueOf(zVelocity));
 	    
 	    TextView txtView5 = (TextView) this.findViewById(R.id.latitude);
 	    txtView5.setText("Latitude: "+Double.toString(b.getDouble("latitude")));

@@ -43,17 +43,17 @@ public class AimActivity extends Activity implements LocationListener{
 	public void getAimInfo(View view)
 	{
 		LocationManager locMgr = ((LocationManager) getSystemService(LOCATION_SERVICE));
-        Location location = locMgr.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
-        latitude =  location.getLatitude();
-		longitude = location.getLongitude();
-		Log.d("", "Latitude: "+latitude);
+        //Location location = locMgr.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        //latitude =  location.getLatitude();
+		//longitude = location.getLongitude();
+		//Log.d("", "Latitude: "+latitude);
         
 		//Toast.makeText(getApplicationContext(),"Your GPS Coordinates are: "+latitude+", "+longitude+"\n"+"Degrees from North: "+ azimuth, Toast.LENGTH_SHORT).show();
 		
 		Intent intent = new Intent(this, ThrowActivity.class);
 		Bundle b = getIntent().getExtras();
-		b.putDouble("latitude",latitude);
-		b.putDouble("longitude",longitude);
+		b.putDouble("latitude", 0);
+		b.putDouble("longitude", 0);
 		b.putDouble("azimuth",azimuth);
 		intent.putExtras(b);
         startActivity(intent);

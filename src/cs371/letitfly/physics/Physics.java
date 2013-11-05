@@ -1,5 +1,7 @@
 package cs371.letitfly.physics;
 
+import java.util.Random;
+
 public class Physics {
 	public static final double g = 9.80665;
 	
@@ -13,57 +15,27 @@ public class Physics {
 		return 2 * Math.abs(initialVelocity / g);
 	}
 	
-	public static double normalizeAcceleration(double acceleration, double mass, MobileDevice mobileDevice) {
+	public static double normalizeAcceleration(double acceleration, double weight, MobileDevice mobileDevice) {
+		
+		Random generator = new Random(0);
+		
 		double force = (mobileDevice.weight() / g) * acceleration;
-		return force / mass;
-	}
-	
-	public static void main(String[] args) {
+		double mass = weight / g;
 		
-		double weight = 0.62;
-		weight = 1000;
-		
-		/* We are given two values, horizontal and vertical acceleration in m/s/s */
-		double xAcceleration = 12;
-		double yAcceleration = 29;
-		double zAcceleration = 22;
-		
-		/* Mass of an object (basketball) in kg */
-		double mass = weight / Physics.g;
-		
-		/* Current device */
-		MobileDevice mobileDevice = MobileDevice.GALAXY_S4;
-		
-		/* Calculate acceleration for the given object */
-		xAcceleration = normalizeAcceleration(xAcceleration, mass, mobileDevice);
-		yAcceleration = normalizeAcceleration(yAcceleration, mass, mobileDevice);
-		zAcceleration = normalizeAcceleration(zAcceleration, mass, mobileDevice);
-		
-		/* We assume the values given are constant and the average time for a device
-		 * to be "thrown" is one second. In other words, it took one second for the device
-		 * to leave my hand from the moment I began to throw it with constant acceleration.
-		 * Therefore, after one second, the initial velocity = initial acceleration
-		 * Also note that as soon as the device leaves my hand, horizontal acceleration is zero.
-		 */
-		double xVelocity = xAcceleration;
-		double yVelocity = yAcceleration;
-		double zVelocity = zAcceleration;
-		
-		/* Calculate the time based on the initial vertical velocity */
-		double time = getTimeElapsed(yVelocity);
-		
-		/* Calculate displacement in meters */
-		double xDisplacement = getDisplacement(xVelocity, time);
-		double zDisplacement = getDisplacement(zVelocity, time);
-		double displacement = Math.sqrt(Math.pow(xDisplacement, 2) + Math.pow(zDisplacement, 2));
-		
-		double feet = displacement * 3.28;
-		
-		/* Print a message */
-		System.out.println("The basketball traveled " + feet + " feet!");
-		
-		/* Add a modifier if necessary */
-		feet *= Math.max((weight / mobileDevice.weight()), 1);
-		System.out.println("Joking! The basketball really traveled " + feet + " feet.");
+		if ((0 < weight) && (weight <= 1)) {
+			return force / mass;
+		}
+		else if ((1 < weight) && (weight <= 3)) {
+			return (force / mass) * (10 - weight * (generator.nextDouble() * 2));
+		}
+		else if ((3 < weight) && (weight <= 10)) {
+			return 0;
+		}
+		else if ((10 < weight) && (weight < 25)) {
+			return 0;
+		}
+		else {
+			return 1 - (force / mass);
+		}
 	}
 }
