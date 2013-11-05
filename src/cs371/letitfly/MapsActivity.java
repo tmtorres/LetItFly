@@ -54,13 +54,9 @@ public class MapsActivity extends Activity {
     	
     	
     	if(value.equals("long")){
-    		Toast.makeText(getApplicationContext(), 
-        			"Longitude = "+Math.toDegrees(longitude), Toast.LENGTH_LONG).show();
     		return Math.toDegrees(longitude);
     	}
     	else if(value.equals("lat")){
-    		Toast.makeText(getApplicationContext(), 
-        			"Latitude = "+Math.toDegrees(latitude), Toast.LENGTH_LONG).show();
     		return Math.toDegrees(latitude);
     	}
     	return null;
@@ -106,8 +102,8 @@ public class MapsActivity extends Activity {
             googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
            
             // create marker
-            MarkerOptions marker = new MarkerOptions().position(new LatLng(latitude, longitude)).title("Object Thrown From Here");
-            MarkerOptions markerDest = new MarkerOptions().position(new LatLng(latDest, longDest)).title("Object Landed Here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+            MarkerOptions marker = new MarkerOptions().position(new LatLng(latitude, longitude)).title("Object Thrown From Here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+            MarkerOptions markerDest = new MarkerOptions().position(new LatLng(latDest, longDest)).title("Object Landed Here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
             
             
             
