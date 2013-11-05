@@ -65,6 +65,32 @@ public class ThrowActivity extends Activity{
         super.onPause();
         sensorManager.unregisterListener(sensorEventListener);
     }
+	@Override
+	public void onResume(){
+		super.onResume();
+		createSensor();
+		maxVals = new double[3];
+		
+		final Bundle b = getIntent().getExtras();
+	    
+	    
+	    maxVals = new double[3];
+	    
+	    ImageButton button = (ImageButton) findViewById(R.id.throw_button);
+	    button.setOnTouchListener(new View.OnTouchListener() {
+			public boolean onTouch(View v, MotionEvent event) {
+				if(event.getAction() == android.view.MotionEvent.ACTION_DOWN ) {
+					// do nothing
+				} else
+				if(event.getAction() == android.view.MotionEvent.ACTION_UP){
+					//Toast.makeText(getApplicationContext(), "Your Max Accelerations are: "+maxVals[0]+", "+maxVals[1]+", "+maxVals[2], Toast.LENGTH_SHORT).show();
+					goToResults(b);
+				}
+				return false;
+				}
+			}); 
+		
+	}
 	
 	
 		private void createSensor() {
