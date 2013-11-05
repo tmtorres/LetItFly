@@ -31,23 +31,19 @@ public class ResultsActivity extends Activity {
 	    double yAcceleration = b.getDouble("yAcceleration");
 	    double zAcceleration = b.getDouble("zAcceleration");
 	    
-	    double averageAcceleration = Math.max((xAcceleration + yAcceleration + zAcceleration) / 3, 1);
+	    double averageAcceleration = (xAcceleration + yAcceleration + zAcceleration) / 3;
 	    
 	    Random generator = new Random(0);
 	    
 	    if (xAcceleration < 1) {
-	    	xAcceleration *= (averageAcceleration * generator.nextDouble());
+	    	xAcceleration *= (averageAcceleration * (generator.nextDouble() * 0.5 + 0.5));
 	    }
 	    if (yAcceleration < 1) {
-	    	yAcceleration *= (averageAcceleration * generator.nextDouble());
+	    	yAcceleration *= (averageAcceleration * (generator.nextDouble() * 0.5 + 0.5));
 	    }
 	    if (zAcceleration < 1) {
-	    	zAcceleration *= (averageAcceleration * generator.nextDouble());
+	    	zAcceleration *= (averageAcceleration * (generator.nextDouble() * 0.5 + 0.5));
 	    }
-	    
-	    /*xAcceleration *= mass;
-	    yAcceleration *= mass;
-	    zAcceleration *= mass;*/
 	    
 	    double xVelocity = Physics.normalizeAcceleration(xAcceleration, weight, mobileDevice);
 	    double yVelocity = Physics.normalizeAcceleration(yAcceleration, weight, mobileDevice);
@@ -78,7 +74,7 @@ public class ResultsActivity extends Activity {
 	    txtView7.setText("Degrees from North: "+Double.toString(b.getDouble("azimuth")));
 	    
 	    TextView txtView8 = (TextView) this.findViewById(R.id.feet);
-	    txtView8.setText("The " + b.getString("objectName") + "traveled " + feet + " feet!");
+	    txtView8.setText("The " + b.getString("objectName") + " traveled " + (int) Math.ceil(feet) + " feet!");
 	    
 	    // TODO Auto-generated method stub
 	}
