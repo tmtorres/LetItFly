@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import cs371.letitfly.physics.Object;
 
 
 public class ObjectSelectionActivity extends Activity {
