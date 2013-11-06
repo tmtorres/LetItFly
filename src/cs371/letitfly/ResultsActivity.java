@@ -1,14 +1,12 @@
 package cs371.letitfly;
 
-import java.util.Random;
-
-import cs371.letitfly.physics.MobileDevice;
-import cs371.letitfly.physics.Physics;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import cs371.letitfly.physics.MobileDevice;
+import cs371.letitfly.physics.Physics;
 
 public class ResultsActivity extends Activity {
 
@@ -18,72 +16,55 @@ public class ResultsActivity extends Activity {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.activity_results);
 	    
-	    Bundle b = getIntent().getExtras();
+	    Bundle bundle = getIntent().getExtras();
 	    
 	    TextView txtView = (TextView) this.findViewById(R.id.object_name);
-	    txtView.setText("Object Name: "+b.getString("objectName"));
+	    txtView.setText("Object Name: "+ bundle.getString("objectName"));
 	    
-	    double weight = b.getDouble("objectMass");
+	    double mass = bundle.getDouble("objectMass");
 	    
 	    MobileDevice mobileDevice = MobileDevice.GALAXY_S4;
 	    
-	    double xAcceleration = b.getDouble("xAcceleration");
-	    double yAcceleration = b.getDouble("yAcceleration");
-	    double zAcceleration = b.getDouble("zAcceleration");
+	    double xAcceleration = bundle.getDouble("xVelocity");
+	    double yAcceleration = bundle.getDouble("yVelocity");
+	    double zAcceleration = bundle.getDouble("zVelocity");
 	    
-	    double averageAcceleration = (xAcceleration + yAcceleration + zAcceleration) / 3;
-	    
-	    Random generator = new Random(0);
-	    
-	    if (xAcceleration < 1) {
-	    	xAcceleration *= (averageAcceleration * (generator.nextDouble() * 0.5 + 0.5));
-	    }
-	    if (yAcceleration < 1) {
-	    	yAcceleration *= (averageAcceleration * (generator.nextDouble() * 0.5 + 0.5));
-	    }
-	    if (zAcceleration < 1) {
-	    	zAcceleration *= (averageAcceleration * (generator.nextDouble() * 0.5 + 0.5));
-	    }
-	    
-	    double xVelocity = Physics.normalizeAcceleration(xAcceleration, weight, mobileDevice);
-	    double yVelocity = Physics.normalizeAcceleration(yAcceleration, weight, mobileDevice);
-	    double zVelocity = Physics.normalizeAcceleration(zAcceleration, weight, mobileDevice);
+	    double xVelocity = Physics.normalizeVelocity(xAcceleration, mass, mobileDevice);
+	    double yVelocity = Physics.normalizeVelocity(yAcceleration, mass, mobileDevice);
+	    double zVelocity = Physics.normalizeVelocity(zAcceleration, mass, mobileDevice);
 	    
 	    double time = Physics.getTimeElapsed(yVelocity);
-	    double xDisplacement = Physics.getDisplacement(xVelocity, time);
-		double zDisplacement = Physics.getDisplacement(zVelocity, time);
+	    double xDisplacement = Physics.getDisplacement(Math.abs(xVelocity), time);
+		double zDisplacement = Physics.getDisplacement(Math.abs(zVelocity), time);
 		double displacement = Math.sqrt(Math.pow(xDisplacement, 2) + Math.pow(zDisplacement, 2));
 		
-		double feet = displacement * 3.28;
+		double feet = Math.sqrt(displacement * 3.28);
 	    
 	    TextView txtView1 = (TextView) this.findViewById(R.id.object_mass);
-	    txtView1.setText("Object's weight (pounds): "+Double.toString(weight * 2.20462));
+	    txtView1.setText("Object's weight (pounds): "+Double.toString(mass * 2.20462));
 	    TextView txtView2 = (TextView) this.findViewById(R.id.x_acceleration);
-	    txtView2.setText("X Accleration: "+Double.toString(b.getDouble("xAcceleration")) +  " " + String.valueOf(xVelocity));
+	    txtView2.setText("X velocity: "+Double.toString(bundle.getDouble("xVelocity")) +  " " + String.valueOf(xVelocity));
 	    TextView txtView3 = (TextView) this.findViewById(R.id.y_acceleration);
-	    txtView3.setText("Y Accleration: "+Double.toString(b.getDouble("yAcceleration")) +  " " + String.valueOf(yVelocity));
+	    txtView3.setText("Y velocity: "+Double.toString(bundle.getDouble("yVelocity")) +  " " + String.valueOf(yVelocity));
 	    TextView txtView4 = (TextView) this.findViewById(R.id.z_acceleration);
-	    txtView4.setText("Z Accleration: "+Double.toString(b.getDouble("zAcceleration")) +  " " + String.valueOf(zVelocity));
+	    txtView4.setText("Z velocity: "+Double.toString(bundle.getDouble("zVelocity")) +  " " + String.valueOf(zVelocity));
 	    
 	    TextView txtView5 = (TextView) this.findViewById(R.id.latitude);
-	    txtView5.setText("Latitude: "+Double.toString(b.getDouble("latitude")));
+	    txtView5.setText("Latitude: "+Double.toString(bundle.getDouble("latitude")));
 	    TextView txtView6 = (TextView) this.findViewById(R.id.longitude);
-	    txtView6.setText("Longitude: "+Double.toString(b.getDouble("longitude")));
+	    txtView6.setText("Longitude: "+Double.toString(bundle.getDouble("longitude")));
 	    
 	    TextView txtView7 = (TextView) this.findViewById(R.id.azimuth);
-	    txtView7.setText("Degrees from North: "+Double.toString(b.getDouble("azimuth")));
+	    txtView7.setText("Degrees from North: "+Double.toString(bundle.getDouble("azimuth")));
 	    
 	    TextView txtView8 = (TextView) this.findViewById(R.id.feet);
-	    txtView8.setText("The " + b.getString("objectName") + " traveled " + (int) Math.ceil(feet) + " feet!");
-	    
-	    // TODO Auto-generated method stub
+	    txtView8.setText("The " + bundle.getString("objectName") + " traveled " + (int) Math.ceil(feet) + " feet!");
 	}
 	
-	public void goToMap(View view)
-	{
-		Bundle b = getIntent().getExtras();
+	public void goToMap(View view) {
+		Bundle bundle = getIntent().getExtras();
 		Intent intent = new Intent(this, MapsActivity.class);
-		intent.putExtras(b);
+		intent.putExtras(bundle);
 		startActivity(intent);
 	}
 

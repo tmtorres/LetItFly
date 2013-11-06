@@ -1,6 +1,5 @@
 package cs371.letitfly.physics;
 
-import java.util.Random;
 
 public class Physics {
 	public static final double g = 9.80665;
@@ -15,28 +14,8 @@ public class Physics {
 		return 2 * Math.abs(initialVelocity / g);
 	}
 	
-	public static double normalizeAcceleration(double acceleration, double weight, MobileDevice mobileDevice) {
-		
-		Random generator = new Random(0);
-		
-		double force = (mobileDevice.weight() / g) * acceleration;
-		double mass = weight / g;
-		
-		if ((0 < weight) && (weight <= 1)) {
-			return force / mass;
-		}
-		else if ((1 < weight) && (weight <= 3)) {
-			return (force / mass) * (10 - weight * (generator.nextDouble() * 0.3 + 2.7));
-		}
-		else if ((3 < weight) && (weight <= 10)) {
-			//return (force / mass) * (31 - weight * (generator.nextDouble() * 0.3 + 2.7));
-			return 0;
-		}
-		else if ((10 < weight) && (weight < 25)) {
-			return 0;
-		}
-		else {
-			return 1 - (force / mass);
-		}
+	public static double normalizeVelocity(double velocity, double mass, MobileDevice mobileDevice) {
+		double energy = 0.5 * mobileDevice.weight() * Math.pow(velocity, 2);
+		return Math.sqrt((2 * energy) / mass);
 	}
 }
