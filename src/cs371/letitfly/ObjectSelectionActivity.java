@@ -149,11 +149,9 @@ public class ObjectSelectionActivity extends Activity {
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-      switch (item.getItemId()) {
-      case R.id.menuItem1:
+      if (item.getItemId() == R.id.menuItem1) {
     	Intent intent = new Intent(this, AddObjectActivity.class);
   		startActivity(intent);
-        break;
       }
       return true;
     } 
