@@ -5,7 +5,7 @@
         android:icon="@drawable/button_throwagain"
         android:label = "@string/throw_again"
         android:orderInCategory="100"
-        android:showAsAction="always"
-        android:title="@string/action_settings"/>
+        android:showAsAction="always|withText"
+        android:title="@string/throw_again"/>
 
 </menu>
