@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import cs371.letitfly.physics.MobileDevice;
 import cs371.letitfly.physics.Physics;
@@ -36,9 +37,14 @@ public class ResultsActivity extends Activity {
 		double zDisplacement = Physics.getDisplacement(Math.abs(zVelocity), time);
 		double displacement = Math.sqrt(Math.pow(xDisplacement, 2) + Math.pow(zDisplacement, 2));
 		
+		double yDisplacement = Math.sqrt(0.5 * Physics.g * Math.pow(time / 2, 2));
+		timeDelay = 2 * Math.sqrt((2 * yDisplacement) / Physics.g);
+		
+		Log.d("", "yDisplacement: " + yDisplacement);
+		Log.d("", "timeDelay: " + timeDelay);
 		
 		feet = Math.sqrt(displacement * 3.28);
-		timeDelay = time/2.0;
+		//timeDelay = time/2.0;
 	    new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

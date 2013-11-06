@@ -8,7 +8,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -75,12 +74,10 @@ public class MapsActivity extends Activity {
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-      switch (item.getItemId()) {
-      case R.id.menuItem1:
+    	if(item.getItemId() == R.id.menuItem1) {
     	Intent intent = new Intent(this, ObjectSelectionActivity.class);
     	//intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
   		startActivity(intent);
-        break;
       }
       return true;
     } 
