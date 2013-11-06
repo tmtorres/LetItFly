@@ -28,7 +28,8 @@ public class MapsActivity extends Activity {
         setContentView(R.layout.activity_map);
         Bundle b = getIntent().getExtras();
         TextView txtView = (TextView) this.findViewById(R.id.feet);
-	    txtView.setText("\n\n"+"The " + b.getString("objectName") + " traveled " + (int) Math.ceil(b.getDouble("feet")) + " feet!");
+        String noun = (int) Math.ceil(b.getDouble("feet")) > 1 ? " feet" : " foot";
+	    txtView.setText("\n\n"+"The " + b.getString("objectName") + " traveled " + (int) Math.ceil(b.getDouble("feet")) + noun + "!");
         try {
             // Loading map
             initilizeMap(b);
