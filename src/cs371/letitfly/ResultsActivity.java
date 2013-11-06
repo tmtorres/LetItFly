@@ -25,13 +25,9 @@ public class ResultsActivity extends Activity {
 	    
 	    MobileDevice mobileDevice = MobileDevice.GALAXY_S4;
 	    
-	    double xAcceleration = bundle.getDouble("xVelocity");
-	    double yAcceleration = bundle.getDouble("yVelocity");
-	    double zAcceleration = bundle.getDouble("zVelocity");
-	    
-	    double xVelocity = Physics.normalizeVelocity(xAcceleration, mass, mobileDevice);
-	    double yVelocity = Physics.normalizeVelocity(yAcceleration, mass, mobileDevice);
-	    double zVelocity = Physics.normalizeVelocity(zAcceleration, mass, mobileDevice);
+	    double xVelocity = Physics.normalizeVelocity(bundle.getDouble("xVelocity"), mass, mobileDevice);
+	    double yVelocity = Physics.normalizeVelocity(bundle.getDouble("yVelocity"), mass, mobileDevice);
+	    double zVelocity = Physics.normalizeVelocity(bundle.getDouble("zVelocity"), mass, mobileDevice);
 	    
 	    double time = Physics.getTimeElapsed(yVelocity);
 	    double xDisplacement = Physics.getDisplacement(Math.abs(xVelocity), time);
@@ -40,6 +36,7 @@ public class ResultsActivity extends Activity {
 		
 		double feet = Math.sqrt(displacement * 3.28);
 	    
+		/*
 	    TextView txtView1 = (TextView) this.findViewById(R.id.object_mass);
 	    txtView1.setText("Object's weight (pounds): "+Double.toString(mass * 2.20462));
 	    TextView txtView2 = (TextView) this.findViewById(R.id.x_acceleration);
@@ -55,10 +52,11 @@ public class ResultsActivity extends Activity {
 	    txtView6.setText("Longitude: "+Double.toString(bundle.getDouble("longitude")));
 	    
 	    TextView txtView7 = (TextView) this.findViewById(R.id.azimuth);
-	    txtView7.setText("Degrees from North: "+Double.toString(bundle.getDouble("azimuth")));
+	    txtView7.setText("Degrees from North: "+Double.toString(bundle.getDouble("azimuth")));*/
 	    
 	    TextView txtView8 = (TextView) this.findViewById(R.id.feet);
-	    txtView8.setText("The " + bundle.getString("objectName") + " traveled " + (int) Math.ceil(feet) + " feet!");
+	    String noun = feet > 1 ? "feet" : "foot";
+	    txtView8.setText("The " + bundle.getString("objectName") + " traveled " + (int) Math.ceil(feet) + " " + noun + "!");
 	}
 	
 	public void goToMap(View view) {
