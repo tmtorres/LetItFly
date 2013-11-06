@@ -51,6 +51,7 @@ public class ThrowActivity extends Activity{
 		Intent intent = new Intent(this, ResultsActivity.class);
 		intent.putExtras(bundle);
 		startActivity(intent);
+		finish();
 	}
 
 	@Override

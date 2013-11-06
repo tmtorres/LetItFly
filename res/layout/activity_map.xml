@@ -1,13 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ android:layout_width="fill_parent"
+ android:layout_height="fill_parent"     
+ android:orientation="vertical" >          
 
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.MapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
- 
-</RelativeLayout>
+ <FrameLayout android:id="@+id/map_frame"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="0.7" >     
 
+	
+	
+	    <fragment
+	        android:id="@+id/map"
+	        android:name="com.google.android.gms.maps.MapFragment"
+	        android:layout_width="fill_parent"
+	        android:layout_height="match_parent"/>
+	 
+</FrameLayout>
+
+ <TextView
+        android:id="@+id/feet"
+        android:layout_width="fill_parent"
+        android:layout_height="200dip"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="14dp"
+        android:textSize="20sp" 
+        android:layout_gravity="bottom"
+    	android:layout_weight="0.3"
+    	android:background = "@drawable/bg_textbox"/>
+	
+</LinearLayout>

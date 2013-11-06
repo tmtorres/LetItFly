@@ -66,12 +66,16 @@
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation|screenSize"></activity>
         <activity 
-            android:name="MapsActivity"></activity>
+            android:name="MapsActivity"
+            android:screenOrientation="portrait"
+			android:configChanges="keyboardHidden|orientation|screenSize"></activity>
         
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyBZ9VgAJPh7OO_xUJ-AO4POkP4j1eyWOXA"/>
-        <activity android:name="AddObjectActivity"></activity>
+        <activity android:name="AddObjectActivity"
+            android:screenOrientation="portrait"
+			android:configChanges="keyboardHidden|orientation|screenSize"></activity>
         
     </application>
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -26,7 +27,8 @@ public class MapsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         Bundle b = getIntent().getExtras();
-     
+        TextView txtView = (TextView) this.findViewById(R.id.feet);
+	    txtView.setText("\n\n"+"The " + b.getString("objectName") + " traveled " + (int) Math.ceil(b.getDouble("feet")) + " feet!");
         try {
             // Loading map
             initilizeMap(b);
@@ -40,7 +42,7 @@ public class MapsActivity extends Activity {
     public Double getCoord(String value){
     	Bundle b = getIntent().getExtras();
     	
-    	double dist = .006/6371; //hardcoded km
+    	double dist = (b.getDouble("feet")*0.0003048)/6371; //hardcoded km
     	double brng = Math.toRadians(b.getDouble("azimuth"));
     	double lat1 = Math.toRadians(b.getDouble("latitude"));
     	double lon1 = Math.toRadians(b.getDouble("longitude"));

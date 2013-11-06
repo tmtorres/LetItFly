@@ -33,6 +33,11 @@ public class AimActivity extends Activity implements LocationListener{
 		super.onPause();
 		sensorManager.unregisterListener(sensorEventListener);
 	}
+	@Override
+	public void onResume(){
+		super.onResume();
+		createSensor();
+	}
 	
 	public void onStop() {
 		super.onStop();
