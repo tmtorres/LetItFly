@@ -2,7 +2,7 @@
 
     <item
         android:id="@+id/menuItem1"
-        android:icon="@drawable/button_throwagain"
+        android:icon="@drawable/button_redo"
         android:label = "@string/throw_again"
         android:orderInCategory="100"
         android:showAsAction="always|withText"
