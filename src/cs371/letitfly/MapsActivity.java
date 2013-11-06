@@ -75,6 +75,7 @@ public class MapsActivity extends Activity {
       switch (item.getItemId()) {
       case R.id.menuItem1:
     	Intent intent = new Intent(this, ObjectSelectionActivity.class);
+    	//intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
   		startActivity(intent);
         break;
       }

@@ -1,0 +1,5 @@
+basketball 0.62369
+cat 4.53592
+football 0.453592
+small rock 2.26796
+big rock 5.67

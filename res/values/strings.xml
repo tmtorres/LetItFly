@@ -9,5 +9,8 @@
     <string name="throw_object">Press and Hold to THROW!</string>
     <string name="goToMap">Click for Map</string>
     <string name="throw_again">Throw Again!</string>
+    <string name="edit_message_name">Enter Name of Object</string>
+    <string name="edit_message_weight">Enter Weight of Object</string>
+    <string name="button_send">Add Object</string>
 
 </resources>
