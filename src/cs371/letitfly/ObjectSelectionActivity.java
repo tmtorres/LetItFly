@@ -37,6 +37,7 @@ public class ObjectSelectionActivity extends Activity {
 		
 		//toast.makeText(getApplicationContext(), "create", //toast.LENGTH_SHORT).show();
 		
+		// retrieving new object and weight if added a new object
 		Bundle bundle = this.getIntent().getExtras();
 		if(bundle!=null)
 		{
@@ -68,7 +69,10 @@ public class ObjectSelectionActivity extends Activity {
 			public void onItemClick(AdapterView<?> myAdapter, View myView, int myItemInt, long mylng) {
 				String selectedFromList = (String) (listView.getItemAtPosition(myItemInt));
 				////toast.makeText(getApplicationContext(), selectedFromList, //toast.LENGTH_SHORT).show();
-				goToAim(selectedFromList);
+				String [] temp;
+            	temp = selectedFromList.split("\\t");
+            
+				goToAim(temp[0]);
 			}  
 		});
 		
@@ -78,8 +82,10 @@ public class ObjectSelectionActivity extends Activity {
                     int pos, long id) {
             	
             	String selectedFromList = (String) (listView.getItemAtPosition(pos));
+            	String [] temp;
+            	temp = selectedFromList.split("\\t");
             	
-            	deleteDialog(selectedFromList);
+            	deleteDialog(temp[0]);
             		
             	
                 return true;
@@ -116,7 +122,7 @@ public class ObjectSelectionActivity extends Activity {
 	  		  }
 	  	  }
 	  	  for (String key : map.keySet()) {
-	  		   object_array_list.add(key);
+	  		   object_array_list.add(key+"\t"+ map.get(key)+" lbs");
 	  	  }
 	  	  
 	  	  storeSharedPrefs();
@@ -150,6 +156,7 @@ public class ObjectSelectionActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
       if (item.getItemId() == R.id.menuItem1) {
+    	storeSharedPrefs();
     	Intent intent = new Intent(this, AddObjectActivity.class);
   		startActivity(intent);
       }
@@ -168,7 +175,7 @@ public class ObjectSelectionActivity extends Activity {
     	for( Entry<String, ?> entry : prefs.getAll().entrySet() ) 
     	  map.put( entry.getKey(), Double.parseDouble(entry.getValue().toString()));
     	for (String key : map.keySet()) {
-	  		   object_array_list.add(key);
+	  		   object_array_list.add(key+"\t"+map.get(key)+" lbs");
 	  	 }
     }
     public void deleteDialog(final String nameOfObject){

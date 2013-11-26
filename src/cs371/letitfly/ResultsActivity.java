@@ -24,7 +24,7 @@ public class ResultsActivity extends Activity {
 	   // TextView txtView = (TextView) this.findViewById(R.id.object_name);
 	   // txtView.setText("Object Name: "+ bundle.getString("objectName"));
 	    
-	    double mass = bundle.getDouble("objectMass");
+	    double mass = bundle.getDouble("objectMass")*0.453592; // convert pounds to kg;
 	    
 	    MobileDevice mobileDevice = MobileDevice.GALAXY_S4;
 	    
