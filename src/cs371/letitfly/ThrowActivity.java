@@ -11,11 +11,14 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
+import android.media.MediaPlayer;
 
-public class ThrowActivity extends Activity{
+public class ThrowActivity extends Activity implements MediaPlayer.OnCompletionListener{
 
 	SensorManager sensorManager;
 	private double[] velocity = {0, 0, 0};
+	
+	private MediaPlayer soundPlayer;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -61,6 +64,13 @@ public class ThrowActivity extends Activity{
 		if (sensorEventListener != null) {
 		    sensorManager.unregisterListener(sensorEventListener);
 		}
+		
+		if(soundPlayer != null && soundPlayer.isPlaying()) {
+			if(soundPlayer.isPlaying())
+				soundPlayer.stop();
+			soundPlayer.release();
+			soundPlayer = null;
+		}
 	}
 
 	public void onStop() {
@@ -74,6 +84,11 @@ public class ThrowActivity extends Activity{
 	@Override
 	public void onResume(){
 		super.onResume();
+		if(soundPlayer == null)
+			soundPlayer = MediaPlayer.create(this, R.raw.sound_throw);
+		
+		soundPlayer.setOnCompletionListener(this);
+		
 		createSensor();
 
 		final Bundle bundle = getIntent().getExtras();
@@ -111,6 +126,19 @@ public class ThrowActivity extends Activity{
 		@Override
 		public void onSensorChanged(SensorEvent event) {
 			changeMaxVals(event);
+			
+			//applying throwing sound
+			float x = event.values[0];
+			float y = event.values[1];
+			float z = event.values[2];
+			float acc = (float) Math.sqrt(x * x + y * y + z * z); 
+			if(acc > 20) {
+				//Log.d("TBBT", "" + acc);
+				if(soundPlayer != null && !soundPlayer.isPlaying()) {
+					soundPlayer.start();
+					//picture.setImageResource(R.drawable.crack);
+				}
+			}
 		}
 
 		@Override
@@ -123,5 +151,10 @@ public class ThrowActivity extends Activity{
 		for (int i = 0; i < velocity.length; i++) {
 			velocity[i] += (float) event.values[i] * 0.1;
 		}
+	}
+	
+	@Override
+	public void onCompletion(MediaPlayer mp) {
+		
 	}
 }

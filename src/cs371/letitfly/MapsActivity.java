@@ -2,6 +2,7 @@ package cs371.letitfly;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,14 +17,27 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends Activity {
+public class MapsActivity extends Activity implements MediaPlayer.OnCompletionListener {
 	 
     // Google Map
     private GoogleMap googleMap;
- 
+    private MediaPlayer soundPlayer;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+      //starting wind sound
+	    if(soundPlayer == null)
+			soundPlayer = MediaPlayer.create(this, R.raw.sound_landing);
+		
+		soundPlayer.setOnCompletionListener(this);
+	    
+	    if(soundPlayer != null && !soundPlayer.isPlaying()) {
+			soundPlayer.start();
+			//picture.setImageResource(R.drawable.crack);
+		}
+        
         setContentView(R.layout.activity_map);
         Bundle b = getIntent().getExtras();
         TextView txtView = (TextView) this.findViewById(R.id.feet);
@@ -124,8 +138,30 @@ public class MapsActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        
+        if(soundPlayer == null)
+			soundPlayer = MediaPlayer.create(this, R.raw.sound_landing);
+		
+		soundPlayer.setOnCompletionListener(this);
+        
         Bundle b = getIntent().getExtras();
         initilizeMap(b);
     }
+    
+    @Override
+	public void onCompletion(MediaPlayer mp) {
+		
+	}
+    
+    @Override
+	public void onPause(){
+		super.onPause();
+		if(soundPlayer != null && soundPlayer.isPlaying()) {
+			if(soundPlayer.isPlaying())
+				soundPlayer.stop();
+			soundPlayer.release();
+			soundPlayer = null;
+		}
+	}
  
 }
