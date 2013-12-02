@@ -1,4 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
+   	<item
+        android:id="@+id/highscorebutton"
+        android:icon="@drawable/button_score"
+        android:label = "@string/high_scores"
+        android:orderInCategory="100"
+        android:showAsAction="always|withText"
+        android:title="@string/high_scores"/> 
 
     <item
         android:id="@+id/menuItem1"

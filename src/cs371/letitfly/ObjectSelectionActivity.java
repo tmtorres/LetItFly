@@ -42,6 +42,9 @@ public class ObjectSelectionActivity extends Activity {
 		if(bundle!=null)
 		{
 			map.put(bundle.getString("newObject"), bundle.getDouble("newWeight"));
+			SharedPreferences.Editor defaultScores = getSharedPreferences("projectileScores", 0).edit();
+			defaultScores.putInt(bundle.getString("newObject"), 0);
+			defaultScores.commit();
 		}
 		
 		
@@ -121,10 +124,15 @@ public class ObjectSelectionActivity extends Activity {
 	  			  map.put("null", sc.nextDouble());
 	  		  }
 	  	  }
+	  	  
+	  	  // adding 0 values for highest score and populating arraylist
+	  	  SharedPreferences.Editor defaultScores = getSharedPreferences("projectileScores", 0).edit();
+	  	  
 	  	  for (String key : map.keySet()) {
 	  		   object_array_list.add(key+"\t"+ map.get(key)+" lbs");
+	  		   defaultScores.putInt(key, 0);
 	  	  }
-	  	  
+	  	  defaultScores.commit();
 	  	  storeSharedPrefs();
 	  	  
 	    } catch (Exception f) {
@@ -166,7 +174,9 @@ public class ObjectSelectionActivity extends Activity {
     	SharedPreferences.Editor editor = getSharedPreferences("projectilePrefs", 0).edit();
 
     	for( Entry<String, Double> entry : map.entrySet() ) 
+    	{
     	  editor.putString( entry.getKey(), entry.getValue().toString() );
+    	}
     	editor.commit();
     }
     public void getSharedPrefs(){
@@ -196,8 +206,11 @@ public class ObjectSelectionActivity extends Activity {
 						// current activity
 						map.remove(nameOfObject);	
 		            	SharedPreferences.Editor editor = getSharedPreferences("projectilePrefs", 0).edit();
+		            	SharedPreferences.Editor scores = getSharedPreferences("projectileScores", 0).edit();
 		            	editor.remove(nameOfObject);
+		            	scores.remove(nameOfObject);
 		            	editor.commit();
+		            	scores.commit();
 		            	finish();
 	            		startActivity(getIntent());
 					}

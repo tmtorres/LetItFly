@@ -12,9 +12,19 @@
         android:layout_height="wrap_content"
         android:src="@drawable/button_main"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="300dip"
+        android:layout_marginTop="275dip"
    		android:gravity="bottom"
    		android:onClick="goToObjSelection" />
+    
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/button_mainscores"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="375dip"
+   		android:gravity="bottom"
+   		android:onClick="goToScores" />
 
     
 </RelativeLayout>

@@ -18,6 +18,11 @@ public class MainActivity extends Activity {
 	    Intent intent = new Intent(this, ObjectSelectionActivity.class);
 	    startActivity(intent);
 	}
+	
+	public void goToScores(View view){
+		 Intent intent = new Intent(this, ScoresActivity.class);
+		 startActivity(intent);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

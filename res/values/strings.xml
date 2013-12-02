@@ -12,5 +12,6 @@
     <string name="edit_message_name">Name of Object</string>
     <string name="edit_message_weight">Weight in lbs</string>
     <string name="button_send">Add Object</string>
+    <string name="high_scores">High Scores</string>
 
 </resources>

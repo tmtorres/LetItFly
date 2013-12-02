@@ -2,6 +2,7 @@ package cs371.letitfly;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
@@ -43,6 +44,17 @@ public class MapsActivity extends Activity implements MediaPlayer.OnCompletionLi
         TextView txtView = (TextView) this.findViewById(R.id.feet);
         String noun = (int) Math.ceil(b.getDouble("feet")) > 1 ? " feet" : " foot";
 	    txtView.setText("\n\n"+"The " + b.getString("objectName") + " traveled " + (int) Math.ceil(b.getDouble("feet")) + noun + "!");
+	    
+	    SharedPreferences prefs = getSharedPreferences("projectileScores", 0);
+	    int highScore = prefs.getInt(b.getString("objectName"), 0);
+	    //int oldScore = Integer.parseInt(highScore);
+	    if(highScore<(int) Math.ceil(b.getDouble("feet")))
+	    {
+	    	SharedPreferences.Editor defaultScores = getSharedPreferences("projectileScores", 0).edit();
+		    defaultScores.putInt(b.getString("objectName"), (int) Math.ceil(b.getDouble("feet")));
+		    defaultScores.commit();
+	    }
+	    
         try {
             // Loading map
             initilizeMap(b);
@@ -90,9 +102,14 @@ public class MapsActivity extends Activity implements MediaPlayer.OnCompletionLi
     public boolean onOptionsItemSelected(MenuItem item) {
     	if(item.getItemId() == R.id.menuItem1) {
     	Intent intent = new Intent(this, ObjectSelectionActivity.class);
-    	//intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    	intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
   		startActivity(intent);
       }
+    	if(item.getItemId() == R.id.highscorebutton) {
+        	Intent intent = new Intent(this, ScoresActivity.class);
+        	//intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+      		startActivity(intent);
+          }
       return true;
     } 
  
