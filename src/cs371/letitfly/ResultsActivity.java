@@ -53,6 +53,10 @@ public class ResultsActivity extends Activity implements MediaPlayer.OnCompletio
 		
 		double yDisplacement = Math.sqrt(0.5 * Physics.g * Math.pow(time / 2, 2));
 		timeDelay = 2 * Math.sqrt((2 * yDisplacement) / Physics.g);
+		if(timeDelay>=10)
+		{
+			timeDelay = 10;
+		}
 		
 		Log.d("", "yDisplacement: " + yDisplacement);
 		Log.d("", "timeDelay: " + timeDelay);
