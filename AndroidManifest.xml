@@ -73,13 +73,14 @@
         
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBZ9VgAJPh7OO_xUJ-AO4POkP4j1eyWOXA"/>
+            android:value="AIzaSyATzHxjn7A9xxcllkg_qyhBvtvhwQrCDkQ"/>
         
         <activity android:name="AddObjectActivity"
             android:screenOrientation="portrait"
 			android:configChanges="keyboardHidden|orientation|screenSize"></activity>
         <activity android:name="ScoresActivity"></activity>
-        <activity android:name="SettingsActivity"></activity>
+        <activity android:name="SettingsActivity"
+            android:label="Select Your Gravity"></activity>
         
     </application>
 

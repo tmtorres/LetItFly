@@ -10,12 +10,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends Activity implements MediaPlayer.OnCompletionListener {
@@ -43,7 +47,7 @@ public class MapsActivity extends Activity implements MediaPlayer.OnCompletionLi
         Bundle b = getIntent().getExtras();
         TextView txtView = (TextView) this.findViewById(R.id.feet);
         String noun = (int) Math.ceil(b.getDouble("feet")) > 1 ? " feet" : " foot";
-	    txtView.setText("\n\n"+"The " + b.getString("objectName") + " traveled " + (int) Math.ceil(b.getDouble("feet")) + noun + "!");
+	    //txtView.setText("\n\n"+"The " + b.getString("objectName") + " traveled " + (int) Math.ceil(b.getDouble("feet")) + noun + "!");
 	    
 	    SharedPreferences prefs = getSharedPreferences("projectileScores", 0);
 	    int highScore = prefs.getInt(b.getString("objectName"), 0);
@@ -53,6 +57,11 @@ public class MapsActivity extends Activity implements MediaPlayer.OnCompletionLi
 	    	SharedPreferences.Editor defaultScores = getSharedPreferences("projectileScores", 0).edit();
 		    defaultScores.putInt(b.getString("objectName"), (int) Math.ceil(b.getDouble("feet")));
 		    defaultScores.commit();
+		    txtView.setText("\n\n"+"The " + b.getString("objectName") + " traveled " + (int) Math.ceil(b.getDouble("feet")) + noun + "!"+"\n\t NEW RECORD!");
+	    }
+	    else
+	    {
+	    	txtView.setText("\n\n"+"The " + b.getString("objectName") + " traveled " + (int) Math.ceil(b.getDouble("feet")) + noun + "!");
 	    }
 	    
         try {
@@ -130,18 +139,23 @@ public class MapsActivity extends Activity implements MediaPlayer.OnCompletionLi
             double longDest = getCoord("long");
             CameraPosition cameraPosition = new CameraPosition.Builder().target(
                     new LatLng(latDest, longDest)).zoom(20).build();
+            
+            LatLng start = new LatLng(latitude, longitude);
+            LatLng finish = new LatLng(latDest, longDest);
      
-            googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+            //googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
            
             // create marker
-            MarkerOptions marker = new MarkerOptions().position(new LatLng(latitude, longitude)).title("Object Thrown From Here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-            MarkerOptions markerDest = new MarkerOptions().position(new LatLng(latDest, longDest)).title("Object Landed Here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+            //MarkerOptions marker = new MarkerOptions().position(new LatLng(latitude, longitude)).title("Object Thrown From Here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+            //MarkerOptions markerDest = new MarkerOptions().position(new LatLng(latDest, longDest)).title("Object Landed Here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
             
-            
+            Marker m1 = googleMap.addMarker(new MarkerOptions().position(start).title("Object Thrown From Here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+            Marker m2 = googleMap.addMarker(new MarkerOptions().position(finish).title("Object Landed Here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+            zoomToFitMarkers(m1, m2);
             
             // adding marker
-            googleMap.addMarker(marker);
-            googleMap.addMarker(markerDest);
+            //googleMap.addMarker(marker);
+            //googleMap.addMarker(markerDest);
  
             // check if map is created successfully or not
             if (googleMap == null) {
@@ -150,6 +164,7 @@ public class MapsActivity extends Activity implements MediaPlayer.OnCompletionLi
                         .show();
             }
         }
+        
     }
  
     @Override
@@ -180,5 +195,17 @@ public class MapsActivity extends Activity implements MediaPlayer.OnCompletionLi
 			soundPlayer = null;
 		}
 	}
+    
+    public void zoomToFitMarkers(Marker... markers) {
+        LatLngBounds.Builder b = new LatLngBounds.Builder();
+        for (Marker m : markers) {
+                b.include(m.getPosition());
+        }
+        LatLngBounds bounds = b.build();
+        CameraUpdate cu = CameraUpdateFactory
+                        .newLatLngBounds(bounds, 50, 50, 0);
+        googleMap.animateCamera(cu);
+    }
+    
  
 }
