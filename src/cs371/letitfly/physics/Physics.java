@@ -2,7 +2,7 @@ package cs371.letitfly.physics;
 
 
 public class Physics {
-	public static final double g = 9.80665;
+	public static float g = Gravity.EARTH.gravity();
 	
 	private Physics() {}
 	

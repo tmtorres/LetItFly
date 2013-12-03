@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 public class MainActivity extends Activity {
@@ -24,11 +26,22 @@ public class MainActivity extends Activity {
 		 startActivity(intent);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
+	 @Override
+	    public boolean onCreateOptionsMenu(Menu menu){
+
+	         MenuInflater inflater = getMenuInflater();
+	         inflater.inflate(R.menu.settings, menu);
+	          return true;
+	    }
+	    
+	    @Override
+	    public boolean onOptionsItemSelected(MenuItem item) {
+	    	if(item.getItemId() == R.id.settings) {
+	    	Intent intent = new Intent(this, SettingsActivity.class);
+	    	//intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	  		startActivity(intent);
+	      }
+	      return true;
+	    } 
 
 }

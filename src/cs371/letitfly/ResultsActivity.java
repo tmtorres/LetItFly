@@ -69,7 +69,7 @@ public class ResultsActivity extends Activity implements MediaPlayer.OnCompletio
         		startActivity(intent);
         		finish();
             }
-        }, (long)timeDelay*1000);
+        }, (long) timeDelay * 1000);
 
 	}
 	
