@@ -54,7 +54,7 @@ public class ScoresActivity extends Activity {
             	temp = selectedFromList.split("\\t");
             	SharedPreferences prefs = getSharedPreferences("projectilePrefs", 0);
             	String weight = prefs.getString(temp[0], null);
-            	Toast toast = Toast.makeText(getApplicationContext(), "Weight: "+weight, Toast.LENGTH_SHORT);
+            	Toast toast = Toast.makeText(getApplicationContext(), "Weight: "+weight+" lbs", Toast.LENGTH_SHORT);
             	toast.show();
 			}  
 		});

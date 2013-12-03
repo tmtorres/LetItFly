@@ -1,0 +1,43 @@
+Let It Fly
+-----------------------
+Team Members:
+Albert Lansang - acl587
+Thomas Torres - tmt696
+
+-----------------------
+Instructions:
+1. On the title screen, you’ll notice three options. You can either throw something, view high scores, or change the acceleration due to gravity.
+2. After tapping the “throw something” button, you’ll see a few preloaded objects. You may select any of these objects to throw.
+You’ll also notice varying weights among these objects.
+3. On the same screen, there is a “+” (add) button in the upper right corner that enables you to create your own objects to throw. To do so, enter a name and weight.
+4. A user may also be able to delete an object by pressing and holding an object's name until the delete dialog appears.
+4. After selecting an object, the aim screen appears. Point the device in the direction you intend to throw the object.
+5. After the next screen appears, press and hold anywhere on the screen for the duration of your throwing motion.
+6. After releasing the “throw” button, the object will be in flight. Upon landing, a map view screen displays your results.
+7. You may press the back button to throw the same object again or press the upper right button to go back to the object selection screen to pick a new object.
+8. You may view your statistics for thrown objects in the high scores menu on the main screen.
+
+Features Completed:
+- Have preloaded objects and functionality to add/delete objects
+- Gathers information from sensors such as GPS location, direction, and acceleration
+- Implemented a Google Map View to view starting and landing positions of the object
+- Normalized acceleration (and other values) to compensate for device limits and realistic results
+
+Features NOT Completed:
+- ability to share to social media
+
+Features Added:
+- Loading screen between throwing and the map view which simulates the object in flight
+- Will replace this screen with some sort of animation in future release
+- High scores table
+- Variable acceleration due to gravity
+- Various sounds/feedback
+
+Referenced Code:
+- We did not use any classes from outside resources, but referenced snippets of code for methods/functions to get GPS location and coordinates from StackOverflow and followed tutorials on the Android Developer website
+- Also, used SensorTest from our in class lecture to retrieve sensor information
+
+Original Code:
+- Physics.java is where the main calculations and results are formed. This class includes basic physics equations, along with normalizers that we derived by trial and error.
+- AimActivity.java and ThrowActivity.java contain most of the sensor gathering code.
+- All other activities are UI driven, basically to display results given by sensor readings and calculated results from Physics.java

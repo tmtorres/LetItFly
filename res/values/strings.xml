@@ -14,5 +14,6 @@
     <string name="button_send">Add Object</string>
     <string name="high_scores">High Scores</string>
     <string name="settings">Gravity Settings</string>
+    <string name="add">Add Object</string>
 
 </resources>

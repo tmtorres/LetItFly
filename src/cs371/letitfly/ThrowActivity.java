@@ -132,7 +132,7 @@ public class ThrowActivity extends Activity implements MediaPlayer.OnCompletionL
 			float y = event.values[1];
 			float z = event.values[2];
 			float acc = (float) Math.sqrt(x * x + y * y + z * z); 
-			if(acc > 20) {
+			if(acc > 25) {
 				//Log.d("TBBT", "" + acc);
 				if(soundPlayer != null && !soundPlayer.isPlaying()) {
 					soundPlayer.start();
